@@ -314,14 +314,14 @@
 
         character_layer {
             bindings = <
-&trans  &trans           &trans      &trans            &trans          &trans               &trans    &trans     &trans          &trans         &trans         &trans
-&trans  &trans           &trans      &trans            &trans          &trans               &trans    &trans     &trans          &trans         &trans         &trans
-&trans  &kp EXCLAMATION  &trans      &kp EQUAL         &kp CARET       &kp TILDE            &trans    &kp HOME   &kp UNDERSCORE  &kp BACKSLASH  &kp PLUS       &trans
-&trans  &kp AT           &kp DOLLAR  &kp MINUS         &kp LEFT_SHIFT  &trans               &kp HASH  &trans     &trans          &kp DELETE     &kp BACKSPACE  &trans
-&trans  &trans           &trans      &kp LEFT_CONTROL  &trans          &trans               &kp END   &kp GRAVE  &kp LBRC        &kp RBRC       &trans         &trans
-&trans  &trans           &trans      &trans            &trans                                         &trans     &trans          &trans         &trans         &trans
-                                                       &trans          &trans     &trans    &trans    &trans     &trans
-                                                       &trans          &trans     &trans    &trans    &trans     &trans
+&trans  &trans           &trans      &trans            &trans          &trans               &trans    &trans         &trans          &trans         &trans    &trans
+&trans  &trans           &trans      &trans            &trans          &trans               &trans    &trans         &trans          &trans         &trans    &trans
+&trans  &kp EXCLAMATION  &trans      &kp EQUAL         &kp CARET       &kp TILDE            &trans    &kp HOME       &kp UNDERSCORE  &kp BACKSLASH  &kp PLUS  &trans
+&trans  &kp AT           &kp DOLLAR  &kp MINUS         &kp LEFT_SHIFT  &trans               &kp HASH  &kp BACKSPACE  &trans          &kp DELETE     &trans    &trans
+&trans  &trans           &trans      &kp LEFT_CONTROL  &trans          &trans               &kp END   &kp GRAVE      &kp LBKT        &kp RBKT       &trans    &trans
+&trans  &trans           &trans      &trans            &trans                                         &trans         &trans          &trans         &trans    &trans
+                                                       &trans          &trans     &trans    &trans    &trans         &trans
+                                                       &trans          &trans     &trans    &trans    &trans         &trans
             >;
         };
 
@@ -363,10 +363,10 @@
 
 &trackball_central_listener {
     input-processors =
-        // multiply sensitivity by 1, divide by 3 (make it slower for scrolling),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+        // multiply sensitivity by 1, divide by 3 (make it slower for scrolling),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
         <&zip_xy_scaler 1 3>,
-        // make this trackball output scrolling events by default instead of cursor movement,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+        // make this trackball output scrolling events by default instead of cursor movement,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
         <&zip_xy_to_scroll_mapper>,
-        // invert vertical scrolling so that the view moves in the same direction as the top of the trackball.,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+        // invert vertical scrolling so that the view moves in the same direction as the top of the trackball.,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
         <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>;
 };
