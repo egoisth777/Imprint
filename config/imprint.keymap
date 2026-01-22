@@ -192,6 +192,20 @@
             #binding-cells = <0>;
             bindings = <&kp LEFT_SHIFT>, <&kp CAPSLOCK>;
         };
+
+        b_del_delword: b_del_delword {
+            compatible = "zmk,behavior-tap-dance";
+            label = "B_DEL_DELWORD";
+            #binding-cells = <0>;
+            bindings = <&kp DELETE>, <&kp LC(DELETE)>;
+        };
+
+        b_backspace_backspace_word: b_backspace_backspace_word {
+            compatible = "zmk,behavior-tap-dance";
+            label = "B_BACKSPACE_BACKSPACE_WORD";
+            #binding-cells = <0>;
+            bindings = <&kp BACKSPACE>, <&kp LC(BACKSPACE)>;
+        };
     };
 
     combos {
@@ -317,29 +331,29 @@
             >;
         };
 
-        character_layer {
+        single-key-remap-layer {
             bindings = <
-&trans  &trans           &trans      &trans            &trans          &trans               &trans         &trans     &trans          &trans         &trans    &trans
-&trans  &trans           &trans      &trans            &trans          &trans               &trans         &trans     &trans          &trans         &trans    &trans
-&trans  &kp EXCLAMATION  &trans      &kp EQUAL         &kp CARET       &kp TILDE            &trans         &kp HOME   &kp UNDERSCORE  &kp BACKSLASH  &kp PLUS  &trans
-&trans  &kp AT           &kp DOLLAR  &kp MINUS         &kp LEFT_SHIFT  &trans               &kp BACKSPACE  &trans     &trans          &kp DELETE     &trans    &trans
-&trans  &trans           &trans      &kp LEFT_CONTROL  &trans          &trans               &kp END        &kp GRAVE  &kp LBKT        &kp RBKT       &trans    &trans
-&trans  &trans           &trans      &trans            &trans                                              &trans     &trans          &trans         &trans    &trans
-                                                       &trans          &trans     &trans    &trans         &trans     &trans
-                                                       &trans          &trans     &trans    &trans         &trans     &trans
+&trans  &trans           &trans      &trans            &trans          &trans               &trans    &trans     &trans          &trans         &trans    &trans
+&trans  &trans           &trans      &trans            &trans          &trans               &trans    &trans     &trans          &trans         &trans    &trans
+&trans  &kp EXCLAMATION  &trans      &kp EQUAL         &kp CARET       &kp TILDE            &trans    &kp HOME   &kp UNDERSCORE  &kp BACKSLASH  &kp PLUS  &trans
+&trans  &kp AT           &kp DOLLAR  &kp MINUS         &kp LEFT_SHIFT  &trans               &kp LEFT  &kp DOWN   &kp UP_ARROW    &kp RIGHT      &trans    &trans
+&trans  &trans           &trans      &kp LEFT_CONTROL  &trans          &trans               &kp END   &kp GRAVE  &kp LBKT        &kp RBKT       &trans    &trans
+&trans  &trans           &trans      &trans            &trans                                         &trans     &trans          &trans         &trans    &trans
+                                                       &trans          &trans     &trans    &trans    &trans     &trans
+                                                       &trans          &trans     &trans    &trans    &trans     &trans
             >;
         };
 
         global_vim_control {
             bindings = <
-&trans  &trans  &trans               &trans     &trans  &trans                  &trans    &trans    &trans        &trans     &trans         &trans
-&trans  &trans  &trans               &trans     &trans  &trans                  &trans    &trans    &trans        &trans     &trans         &trans
-&trans  &trans  &kp LC(RIGHT_ARROW)  &trans     &trans  &trans                  &yank     &kp HOME  &trans        &trans     &kp LC(V)      &trans
-&trans  &trans  &trans               &del_line  &trans  &b_gg                   &kp LEFT  &kp DOWN  &kp UP_ARROW  &kp RIGHT  &kp BACKSPACE  &trans
-&trans  &trans  &trans               &trans     &trans  &kp LC(LEFT)            &kp END   &trans    &trans        &trans     &trans         &trans
-&trans  &trans  &trans               &trans     &trans                                    &trans    &trans        &trans     &trans         &trans
-                                                &trans  &trans        &trans    &trans    &trans    &trans
-                                                &trans  &trans        &trans    &trans    &trans    &trans
+&trans  &trans  &trans               &trans     &trans  &trans                  &trans                       &trans    &trans  &trans          &trans     &trans
+&trans  &trans  &trans               &trans     &trans  &trans                  &trans                       &trans    &trans  &trans          &trans     &trans
+&trans  &trans  &kp LC(RIGHT_ARROW)  &trans     &trans  &trans                  &yank                        &kp HOME  &trans  &trans          &kp LC(V)  &trans
+&trans  &trans  &trans               &del_line  &trans  &b_gg                   &b_backspace_backspace_word  &trans    &trans  &b_del_delword  &trans     &trans
+&trans  &trans  &trans               &trans     &trans  &kp LC(LEFT)            &kp END                      &trans    &trans  &trans          &trans     &trans
+&trans  &trans  &trans               &trans     &trans                                                       &trans    &trans  &trans          &trans     &trans
+                                                &trans  &trans        &trans    &trans                       &trans    &trans
+                                                &trans  &trans        &trans    &trans                       &trans    &trans
             >;
         };
 
@@ -368,10 +382,10 @@
 
 &trackball_central_listener {
     input-processors =
-        // multiply sensitivity by 1, divide by 3 (make it slower for scrolling),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+        // multiply sensitivity by 1, divide by 3 (make it slower for scrolling),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
         <&zip_xy_scaler 1 3>,
-        // make this trackball output scrolling events by default instead of cursor movement,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+        // make this trackball output scrolling events by default instead of cursor movement,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
         <&zip_xy_to_scroll_mapper>,
-        // invert vertical scrolling so that the view moves in the same direction as the top of the trackball.,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+        // invert vertical scrolling so that the view moves in the same direction as the top of the trackball.,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
         <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>;
 };
