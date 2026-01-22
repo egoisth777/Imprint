@@ -12,7 +12,7 @@
     chosen { zmk,matrix-transform = &imprint_function_row_full_bottom_row; };
 
     macros {
-        m_copy_line: copy_line {
+        m_cpy_line: copy_line {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings =
@@ -45,6 +45,123 @@
 
             label = "M_DELETE_LINE";
         };
+
+        m_chg_inner_word: m_del_word {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&kp LC(LEFT)>,
+                <&macro_press>,
+                <&kp LEFT_SHIFT>,
+                <&macro_tap>,
+                <&kp LC(RIGHT_ARROW)>,
+                <&macro_release>,
+                <&kp LEFT_SHIFT>,
+                <&macro_tap>,
+                <&kp DELETE>;
+
+            label = "M_DEL_WORD";
+        };
+
+        m_sel_inner_word: m_select_word {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&kp LC(LEFT)>,
+                <&macro_press>,
+                <&kp LEFT_SHIFT>,
+                <&macro_tap>,
+                <&kp LC(RIGHT_ARROW)>,
+                <&macro_release>,
+                <&kp LEFT_SHIFT>,
+                <&macro_tap>;
+
+            label = "M_SELECT_WORD";
+        };
+
+        m_select_line: m_select_line {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&kp HOME>,
+                <&macro_press>,
+                <&kp LEFT_SHIFT>,
+                <&macro_tap>,
+                <&kp END>,
+                <&macro_release>,
+                <&kp LEFT_SHIFT>,
+                <&macro_tap>;
+
+            label = "M_SELECT_LINE";
+        };
+
+        m_del_copy_inner_word: m_del_copy_inner_word {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&kp LC(LEFT)>,
+                <&macro_press>,
+                <&kp LEFT_SHIFT>,
+                <&macro_tap>,
+                <&kp LC(RIGHT_ARROW)>,
+                <&macro_release>,
+                <&kp LEFT_SHIFT>,
+                <&macro_tap>,
+                <&kp LC(X)>;
+
+            label = "M_DEL_COPY_INNER_WORD";
+        };
+
+        m_del_cpy_line: m_del_cpy_line {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&kp HOME>,
+                <&macro_press>,
+                <&kp LEFT_SHIFT>,
+                <&macro_tap>,
+                <&kp END>,
+                <&macro_release>,
+                <&kp LEFT_SHIFT>,
+                <&macro_tap>,
+                <&kp LC(X)>;
+
+            label = "M_DEL_CPY_LINE";
+        };
+
+        m_del_inner_word: m_del_inner_word {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&kp LC(LEFT)>,
+                <&macro_press>,
+                <&kp LEFT_SHIFT>,
+                <&macro_tap>,
+                <&kp LC(RIGHT_ARROW)>,
+                <&macro_release>,
+                <&kp LEFT_SHIFT>,
+                <&macro_tap>,
+                <&kp DELETE>;
+
+            label = "M_DEL_INNER_WORD";
+        };
+
+        m_cpy_inner_word: m_cpy_inner_word {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&kp LC(LEFT)>,
+                <&macro_press>,
+                <&kp LEFT_SHIFT>,
+                <&macro_tap>,
+                <&kp LC(RIGHT_ARROW)>,
+                <&macro_release>,
+                <&kp LEFT_SHIFT>,
+                <&macro_tap>,
+                <&kp LC(C)>;
+
+            label = "M_CPY_INNER_WORD";
+        };
     };
 
     behaviors {
@@ -52,7 +169,7 @@
             compatible = "zmk,behavior-tap-dance";
             label = "YANK";
             #binding-cells = <0>;
-            bindings = <&kp LC(C)>, <&m_copy_line>;
+            bindings = <&kp LC(C)>, <&m_cpy_line>;
         };
 
         del_line: del_line {
@@ -60,6 +177,46 @@
             label = "DEL_LINE";
             #binding-cells = <0>;
             bindings = <&kp DELETE>, <&m_del_line>;
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        c_dw {
+            bindings = <&kp LC(DELETE)>;
+            key-positions = <39 26>;
+            layers = <5>;
+        };
+
+        c_db {
+            bindings = <&kp LC(BACKSPACE)>;
+            key-positions = <39 53>;
+            layers = <5>;
+        };
+
+        c_ciw {
+            bindings = <&m_del_copy_inner_word>;
+            key-positions = <51 32 26>;
+            layers = <5>;
+        };
+
+        c_viw {
+            bindings = <&m_sel_inner_word>;
+            key-positions = <32 26 52>;
+            layers = <5>;
+        };
+
+        c_diw {
+            bindings = <&m_del_inner_word>;
+            key-positions = <32 39 26>;
+            layers = <5>;
+        };
+
+        m_yiw {
+            bindings = <&m_del_inner_word>;
+            key-positions = <32 26 30>;
+            layers = <5>;
         };
     };
 
@@ -133,14 +290,14 @@
 
         global_vim_control {
             bindings = <
-&trans  &trans  &trans               &trans     &trans  &trans                  &trans  &trans  &trans  &trans  &trans     &trans
-&trans  &trans  &trans               &trans     &trans  &trans                  &trans  &trans  &trans  &trans  &trans     &trans
-&trans  &trans  &kp LC(RIGHT_ARROW)  &trans     &trans  &trans                  &yank   &trans  &trans  &trans  &kp LC(V)  &trans
-&trans  &trans  &trans               &del_line  &trans  &trans                  &trans  &trans  &trans  &trans  &trans     &trans
-&trans  &trans  &trans               &trans     &trans  &kp LC(LEFT)            &trans  &trans  &trans  &trans  &trans     &trans
-&trans  &trans  &trans               &trans     &trans                                  &trans  &trans  &trans  &trans     &trans
-                                                &trans  &trans        &trans    &trans  &trans  &trans
-                                                &trans  &trans        &trans    &trans  &trans  &trans
+&trans  &trans  &trans               &trans     &trans  &trans                  &trans    &trans    &trans        &trans     &trans     &trans
+&trans  &trans  &trans               &trans     &trans  &trans                  &trans    &trans    &trans        &trans     &trans     &trans
+&trans  &trans  &kp LC(RIGHT_ARROW)  &trans     &trans  &trans                  &yank     &trans    &trans        &trans     &kp LC(V)  &trans
+&trans  &trans  &trans               &del_line  &trans  &trans                  &kp LEFT  &kp DOWN  &kp UP_ARROW  &kp RIGHT  &trans     &trans
+&trans  &trans  &trans               &trans     &trans  &kp LC(LEFT)            &trans    &trans    &trans        &trans     &trans     &trans
+&trans  &trans  &trans               &trans     &trans                                    &trans    &trans        &trans     &trans     &trans
+                                                &trans  &trans        &trans    &trans    &trans    &trans
+                                                &trans  &trans        &trans    &trans    &trans    &trans
             >;
         };
     };
@@ -156,10 +313,10 @@
 
 &trackball_central_listener {
     input-processors =
-        // multiply sensitivity by 1, divide by 3 (make it slower for scrolling),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+        // multiply sensitivity by 1, divide by 3 (make it slower for scrolling),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
         <&zip_xy_scaler 1 3>,
-        // make this trackball output scrolling events by default instead of cursor movement,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+        // make this trackball output scrolling events by default instead of cursor movement,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
         <&zip_xy_to_scroll_mapper>,
-        // invert vertical scrolling so that the view moves in the same direction as the top of the trackball.,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+        // invert vertical scrolling so that the view moves in the same direction as the top of the trackball.,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
         <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>;
 };
