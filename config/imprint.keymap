@@ -162,6 +162,20 @@
 
             label = "M_CPY_INNER_WORD";
         };
+
+        m_new_line: new_line {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp END &kp ENTER>;
+            label = "NEW_LINE";
+        };
+
+        m_new_line_above: m_new_line_above {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp HOME &kp ENTER &kp UP_ARROW &kp TAB>;
+            label = "M_NEW_LINE_ABOVE";
+        };
     };
 
     behaviors {
@@ -303,14 +317,14 @@
 
         single-key-remap-nav-layer {
             bindings = <
-&trans  &trans           &trans         &trans            &trans          &trans                  &trans    &trans     &trans          &trans         &trans    &trans
-&trans  &trans           &trans         &trans            &trans          &trans                  &trans    &trans     &trans          &trans         &trans    &trans
-&trans  &kp EXCLAMATION  &kp LC(RIGHT)  &kp EQUAL         &kp CARET       &kp TILDE               &trans    &kp HOME   &kp UNDERSCORE  &kp BACKSLASH  &kp PLUS  &trans
-&trans  &kp AT           &kp DOLLAR     &kp MINUS         &kp LEFT_SHIFT  &trans                  &kp LEFT  &kp DOWN   &kp UP_ARROW    &kp RIGHT      &trans    &trans
-&trans  &trans           &trans         &kp LEFT_CONTROL  &trans          &kp LC(LEFT)            &kp END   &kp GRAVE  &kp LBKT        &kp RBKT       &trans    &trans
-&trans  &trans           &trans         &trans            &trans                                            &trans     &trans          &trans         &trans    &trans
-                                                          &trans          &trans        &trans    &trans    &trans     &trans
-                                                          &trans          &trans        &trans    &trans    &trans     &trans
+&trans  &trans            &trans         &trans     &trans          &trans                  &trans    &trans     &trans          &trans         &trans    &trans
+&trans  &trans            &trans         &trans     &trans          &trans                  &trans    &trans     &trans          &trans         &trans    &trans
+&trans  &kp EXCLAMATION   &kp LC(RIGHT)  &kp EQUAL  &kp CARET       &kp TILDE               &trans    &kp HOME   &kp UNDERSCORE  &kp BACKSLASH  &kp PLUS  &trans
+&trans  &kp AT            &kp DOLLAR     &kp MINUS  &kp LEFT_SHIFT  &trans                  &kp LEFT  &kp DOWN   &kp UP_ARROW    &kp RIGHT      &trans    &trans
+&trans  &kp LEFT_CONTROL  &kp LC(X)      &kp LC(C)  &kp LC(V)       &kp LC(LEFT)            &kp END   &kp GRAVE  &kp LBKT        &kp RBKT       &trans    &trans
+&trans  &trans            &trans         &trans     &trans                                            &trans     &trans          &trans         &trans    &trans
+                                                    &trans          &trans        &trans    &trans    &trans     &trans
+                                                    &trans          &trans        &trans    &trans    &trans     &trans
             >;
         };
 
@@ -329,14 +343,14 @@
 
         vim_0_layer {
             bindings = <
-&trans  &trans  &trans               &trans     &trans  &trans                  &trans                       &trans    &trans  &trans          &trans         &trans
-&trans  &trans  &trans               &trans     &trans  &trans                  &trans                       &trans    &trans  &trans          &trans         &trans
-&trans  &trans  &kp LC(RIGHT_ARROW)  &trans     &trans  &trans                  &yank                        &kp HOME  &trans  &trans          &kp LC(V)      &trans
-&trans  &trans  &trans               &del_line  &trans  &b_gg                   &b_backspace_backspace_word  &trans    &trans  &b_del_delword  &kp BACKSPACE  &trans
-&trans  &trans  &trans               &trans     &trans  &kp LC(LEFT)            &kp END                      &trans    &trans  &trans          &trans         &trans
-&trans  &trans  &trans               &trans     &trans                                                       &trans    &trans  &trans          &trans         &trans
-                                                &trans  &trans        &trans    &trans                       &trans    &trans
-                                                &trans  &trans        &trans    &trans                       &trans    &trans
+&trans  &trans  &trans               &trans     &trans  &trans                  &trans                       &trans     &trans  &trans          &trans         &trans
+&trans  &trans  &trans               &trans     &trans  &trans                  &trans                       &trans     &trans  &trans          &trans         &trans
+&trans  &trans  &kp LC(RIGHT_ARROW)  &trans     &trans  &trans                  &yank                        &kp LC(Z)  &trans  &m_new_line     &kp LC(V)      &trans
+&trans  &trans  &trans               &del_line  &trans  &b_gg                   &b_backspace_backspace_word  &trans     &trans  &b_del_delword  &kp BACKSPACE  &trans
+&trans  &trans  &trans               &trans     &trans  &kp LC(LEFT)            &kp END                      &trans     &trans  &trans          &trans         &trans
+&trans  &trans  &trans               &trans     &trans                                                       &trans     &trans  &trans          &trans         &trans
+                                                &trans  &sl 7         &trans    &trans                       &trans     &trans
+                                                &trans  &trans        &trans    &trans                       &trans     &trans
             >;
         };
 
@@ -365,6 +379,19 @@
                                 &trans  &trans  &trans    &trans  &trans  &trans
             >;
         };
+
+        vim-shift-pressed {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans       &trans            &trans  &trans  &trans  &trans             &trans  &trans
+&trans  &trans  &trans  &trans  &trans       &trans            &trans  &trans  &trans  &trans             &trans  &trans
+&trans  &trans  &trans  &trans  &trans       &trans            &trans  &trans  &trans  &m_new_line_above  &trans  &trans
+&trans  &trans  &trans  &trans  &trans       &trans            &trans  &trans  &trans  &trans             &trans  &trans
+&trans  &trans  &trans  &trans  &m_sel_line  &trans            &trans  &trans  &trans  &trans             &trans  &trans
+&trans  &trans  &trans  &trans  &trans                                 &trans  &trans  &trans             &trans  &trans
+                                &trans       &trans  &trans    &trans  &trans  &trans
+                                &trans       &trans  &trans    &trans  &trans  &trans
+            >;
+        };
     };
 };
 
@@ -378,10 +405,10 @@
 
 &trackball_central_listener {
     input-processors =
-        // multiply sensitivity by 1, divide by 3 (make it slower for scrolling),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+        // multiply sensitivity by 1, divide by 3 (make it slower for scrolling),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
         <&zip_xy_scaler 1 3>,
-        // make this trackball output scrolling events by default instead of cursor movement,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+        // make this trackball output scrolling events by default instead of cursor movement,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
         <&zip_xy_to_scroll_mapper>,
-        // invert vertical scrolling so that the view moves in the same direction as the top of the trackball.,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+        // invert vertical scrolling so that the view moves in the same direction as the top of the trackball.,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
         <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>;
 };
