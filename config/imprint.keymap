@@ -173,7 +173,7 @@
         m_new_line_above: m_new_line_above {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp HOME &kp ENTER &kp UP_ARROW &kp TAB>;
+            bindings = <&kp HOME &kp ENTER &kp UP_ARROW>;
             label = "M_NEW_LINE_ABOVE";
         };
     };
@@ -184,13 +184,6 @@
             label = "YANK";
             #binding-cells = <0>;
             bindings = <&kp LC(C)>, <&m_cpy_line>;
-        };
-
-        del_line: del_line {
-            compatible = "zmk,behavior-tap-dance";
-            label = "DEL_LINE";
-            #binding-cells = <0>;
-            bindings = <&trans>, <&m_del_line>;
         };
 
         b_gg: b_gg {
@@ -297,21 +290,8 @@
 &kp ESC         &kp A            &kp S           &kp D         &kp F             &kp G                        &kp H      &kp J          &kp K          &kp L     &kp SEMI  &kp SQT
 &kp LEFT_SHIFT  &kp Z            &kp X           &kp C         &kp V             &kp B                        &kp N      &kp M          &kp COMMA      &kp DOT   &kp FSLH  &kp F12
 &msc SCRL_LEFT  &msc SCRL_RIGHT  &msc SCRL_DOWN  &msc SCRL_UP  &kp PAGE_UP                                               &kp PAGE_DOWN  &kp LBKT       &kp RBKT  &kp HOME  &kp END
-                                                               &lt 2 SPACE       &b_shift_caps  &kp DELETE    &mkp LCLK  &kp ENTER      &lt 4 SPACE
+                                                               &lt 1 SPACE       &b_shift_caps  &kp DELETE    &mkp LCLK  &kp ENTER      &lt 3 SPACE
                                                                &kp LEFT_CONTROL  &kp LEFT_WIN   &tog 0        &mkp RCLK  &kp LEFT_ALT   &kp BACKSPACE
-            >;
-        };
-
-        Keyboard_Control_Layer {
-            bindings = <
-&trans       &trans        &trans        &trans        &trans        &trans                  &trans           &trans           &trans           &trans           &trans           &trans
-&bt BT_CLR   &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4            &trans           &rgb_ug RGB_TOG  &rgb_ug RGB_EFF  &trans           &trans           &trans
-&sys_reset   &trans        &trans        &trans        &trans        &trans                  &rgb_ug RGB_TOG  &rgb_ug RGB_HUI  &rgb_ug RGB_SAI  &rgb_ug RGB_BRI  &rgb_ug RGB_SPI  &sys_reset
-&bootloader  &trans        &trans        &trans        &trans        &trans                  &trans           &rgb_ug RGB_HUD  &rgb_ug RGB_SAD  &rgb_ug RGB_BRD  &rgb_ug RGB_SPD  &bootloader
-&to 0        &trans        &trans        &trans        &trans        &trans                  &trans           &trans           &trans           &trans           &trans           &to 0
-&to 0        &trans        &trans        &trans        &trans                                                 &trans           &trans           &trans           &trans           &to 0
-                                                       &trans        &trans        &trans    &trans           &trans           &trans
-                                                       &trans        &trans        &trans    &trans           &trans           &trans
             >;
         };
 
@@ -343,14 +323,14 @@
 
         vim_0_layer {
             bindings = <
-&trans  &trans  &trans               &trans     &trans  &trans                  &trans                       &trans     &trans  &trans          &trans         &trans
-&trans  &trans  &trans               &trans     &trans  &trans                  &trans                       &trans     &trans  &trans          &trans         &trans
-&trans  &trans  &kp LC(RIGHT_ARROW)  &trans     &trans  &trans                  &yank                        &kp LC(Z)  &trans  &m_new_line     &kp LC(V)      &trans
-&trans  &trans  &trans               &del_line  &trans  &b_gg                   &b_backspace_backspace_word  &trans     &trans  &b_del_delword  &kp BACKSPACE  &trans
-&trans  &trans  &trans               &trans     &trans  &kp LC(LEFT)            &trans                       &trans     &trans  &trans          &trans         &trans
-&trans  &trans  &trans               &trans     &trans                                                       &trans     &trans  &trans          &trans         &trans
-                                                &trans  &sl 7         &trans    &trans                       &trans     &trans
-                                                &trans  &trans        &trans    &trans                       &trans     &trans
+&trans  &trans  &trans               &trans  &trans  &trans                  &trans                       &trans     &trans  &trans          &trans         &trans
+&trans  &trans  &trans               &trans  &trans  &trans                  &trans                       &trans     &trans  &trans          &trans         &trans
+&trans  &trans  &kp LC(RIGHT_ARROW)  &trans  &trans  &trans                  &yank                        &kp LC(Z)  &trans  &m_new_line     &kp LC(V)      &trans
+&trans  &trans  &trans               &sl 8   &trans  &b_gg                   &b_backspace_backspace_word  &trans     &trans  &b_del_delword  &kp BACKSPACE  &trans
+&trans  &trans  &trans               &sl 4   &trans  &kp LC(LEFT)            &trans                       &trans     &trans  &trans          &trans         &trans
+&trans  &trans  &trans               &trans  &trans                                                       &trans     &trans  &trans          &trans         &trans
+                                             &trans  &sl 6         &trans    &trans                       &trans     &trans
+                                             &trans  &trans        &trans    &trans                       &trans     &trans
             >;
         };
 
@@ -358,7 +338,7 @@
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans            &trans  &trans  &sl 9   &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans                            &trans  &trans  &trans  &trans  &trans
@@ -392,6 +372,58 @@
                                 &trans       &trans  &trans    &trans  &trans  &trans
             >;
         };
+
+        Keyboard_Control_Layer {
+            bindings = <
+&trans       &trans        &trans        &trans        &trans        &trans                  &trans           &trans           &trans           &trans           &trans           &trans
+&bt BT_CLR   &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4            &trans           &rgb_ug RGB_TOG  &rgb_ug RGB_EFF  &trans           &trans           &trans
+&sys_reset   &trans        &trans        &trans        &trans        &trans                  &rgb_ug RGB_TOG  &rgb_ug RGB_HUI  &rgb_ug RGB_SAI  &rgb_ug RGB_BRI  &rgb_ug RGB_SPI  &sys_reset
+&bootloader  &trans        &trans        &trans        &trans        &trans                  &trans           &rgb_ug RGB_HUD  &rgb_ug RGB_SAD  &rgb_ug RGB_BRD  &rgb_ug RGB_SPD  &bootloader
+&to 0        &trans        &trans        &trans        &trans        &trans                  &trans           &trans           &trans           &trans           &trans           &to 0
+&to 0        &trans        &trans        &trans        &trans                                                 &trans           &trans           &trans           &trans           &to 0
+                                                       &trans        &trans        &trans    &trans           &trans           &trans
+                                                       &trans        &trans        &trans    &trans           &trans           &trans
+            >;
+        };
+
+        vim-d-pressed {
+            bindings = <
+&trans  &trans  &trans         &trans           &trans  &trans                       &trans  &trans  &trans  &trans       &trans  &trans
+&trans  &trans  &trans         &trans           &trans  &trans                       &trans  &trans  &trans  &trans       &trans  &trans
+&trans  &trans  &kp LC(RIGHT)  &trans           &trans  &trans                       &trans  &trans  &sl 10  &trans       &trans  &trans
+&trans  &trans  &trans         &m_del_cpy_line  &trans  &trans                       &trans  &trans  &trans  &m_del_line  &trans  &trans
+&trans  &trans  &trans         &trans           &trans  &kp LC(BACKSPACE)            &trans  &trans  &trans  &trans       &trans  &trans
+&trans  &trans  &trans         &trans           &trans                                       &trans  &trans  &trans       &trans  &trans
+                                                &trans  &trans             &trans    &trans  &trans  &trans
+                                                &trans  &trans             &trans    &trans  &trans  &trans
+            >;
+        };
+
+        vim-ci-pressed {
+            bindings = <
+&trans  &trans  &trans                  &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans                  &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &m_del_copy_inner_word  &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans                  &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans                  &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans                  &trans  &trans                            &trans  &trans  &trans  &trans  &trans
+                                                &trans  &trans  &trans    &trans  &trans  &trans
+                                                &trans  &trans  &trans    &trans  &trans  &trans
+            >;
+        };
+
+        vim-di-pressed {
+            bindings = <
+&trans  &trans  &trans             &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans             &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &m_del_inner_word  &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans             &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans             &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans             &trans  &trans                            &trans  &trans  &trans  &trans  &trans
+                                           &trans  &trans  &trans    &trans  &trans  &trans
+                                           &trans  &trans  &trans    &trans  &trans  &trans
+            >;
+        };
     };
 };
 
@@ -405,10 +437,10 @@
 
 &trackball_central_listener {
     input-processors =
-        // multiply sensitivity by 1, divide by 3 (make it slower for scrolling),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+        // multiply sensitivity by 1, divide by 3 (make it slower for scrolling),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
         <&zip_xy_scaler 1 3>,
-        // make this trackball output scrolling events by default instead of cursor movement,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+        // make this trackball output scrolling events by default instead of cursor movement,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
         <&zip_xy_to_scroll_mapper>,
-        // invert vertical scrolling so that the view moves in the same direction as the top of the trackball.,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+        // invert vertical scrolling so that the view moves in the same direction as the top of the trackball.,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
         <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>;
 };
