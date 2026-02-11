@@ -22,3 +22,11 @@ include:
     shield: imprint_left
   - board: assimilator-bt
     shield: imprint_right
+  - board: assimilator-bt
+    shield: imprint_left
+    cmake-args: -DZMK_CONFIG="bond_reset"
+    artifact-name: bond_reset_left
+  - board: assimilator-bt
+    shield: imprint_right
+    cmake-args: -DZMK_CONFIG="bond_reset"
+    artifact-name: bond_reset_right
